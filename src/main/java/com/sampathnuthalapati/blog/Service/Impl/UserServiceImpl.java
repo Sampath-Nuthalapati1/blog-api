@@ -5,6 +5,7 @@ import com.sampathnuthalapati.blog.Payload.UserDTO;
 import com.sampathnuthalapati.blog.Repository.UserRepo;
 import com.sampathnuthalapati.blog.Service.UserService;
 import com.sampathnuthalapati.blog.Exception.ResourceNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = this.dtoToUser(userDTO);
@@ -62,23 +66,25 @@ public class UserServiceImpl implements UserService {
     }
 
     public User dtoToUser(UserDTO userDTO) {
-        User user= new User();
-        user.setId(userDTO.getId());
-        user.setName(userDTO.getName());
-        user.setAbout(userDTO.getAbout());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
+        User user = this.modelMapper.map(userDTO, User.class);
+//        User user= new User();
+//        user.setId(userDTO.getId());
+//        user.setName(userDTO.getName());
+//        user.setAbout(userDTO.getAbout());
+//        user.setEmail(userDTO.getEmail());
+//        user.setPassword(userDTO.getPassword());
         return user;
 
     }
 
     public UserDTO userToDTO(User user) {
-        UserDTO userDTO= new UserDTO();
-        userDTO.setId(user.getId());
-        userDTO.setName(user.getName());
-        userDTO.setAbout(user.getAbout());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setPassword(user.getPassword());
+        UserDTO userDTO = this.modelMapper.map(user, UserDTO.class);
+//        UserDTO userDTO= new UserDTO();
+//        userDTO.setId(user.getId());
+//        userDTO.setName(user.getName());
+//        userDTO.setAbout(user.getAbout());
+//        userDTO.setEmail(user.getEmail());
+//        userDTO.setPassword(user.getPassword());
         return userDTO;
 
     }
