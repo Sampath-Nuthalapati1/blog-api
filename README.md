@@ -3,6 +3,10 @@
 
 An application used to expose protected enpoints and allows users to post, edit, save and view their blog posts, built with Java, Spring Boot, Maven, Spring Security, Spring Data JPA (Hibernate), and MySQL.
 
+## Tech Stack
+
+[![Tech_Stack](https://skillicons.dev/icons?i=java,spring,maven,hibernate,mysql,postman,git,github&theme=light)](https://skillicons.dev)
+
 ## Installation and Setup Instructions
 
 Clone down this repository. You will need `jdk` installed globally on your machine along with an IDE (STS or intelliJ IDEA) and MySQL Workbench installed.
