@@ -1,5 +1,6 @@
 package com.sampathnuthalapati.blog.Controller;
 
+import com.sampathnuthalapati.blog.Exception.ApiException;
 import com.sampathnuthalapati.blog.Payload.JwtAuthRequest;
 import com.sampathnuthalapati.blog.Payload.JwtAuthResponse;
 import com.sampathnuthalapati.blog.Security.JwtHelper;
@@ -40,23 +41,21 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    private void doAuthenticate(String email, String password) {
+    private void doAuthenticate(String email, String password){
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
         try {
             authenticationManager.authenticate(authentication);
-
-
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException(" Invalid Username or Password!!");
+            throw new ApiException(" Invalid Username or Password!!");
         }
 
     }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public String exceptionHandler() {
-        return "Credentials Invalid !!";
-    }
+//    @ExceptionHandler(BadCredentialsException.class)
+//    public String exceptionHandler() {
+//        return "Credentials Invalid !!";
+//    }
 
 
 
