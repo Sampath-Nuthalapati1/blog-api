@@ -3,7 +3,9 @@ package com.sampathnuthalapati.blog.Controller;
 import com.sampathnuthalapati.blog.Exception.ApiException;
 import com.sampathnuthalapati.blog.Payload.JwtAuthRequest;
 import com.sampathnuthalapati.blog.Payload.JwtAuthResponse;
+import com.sampathnuthalapati.blog.Payload.UserDTO;
 import com.sampathnuthalapati.blog.Security.JwtHelper;
+import com.sampathnuthalapati.blog.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +26,13 @@ public class AuthController {
     private UserDetailsService userDetailsService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request) {
+    public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request) throws Exception{
 
         this.doAuthenticate(request.getUsername(), request.getPassword());
 
@@ -41,7 +46,7 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    private void doAuthenticate(String email, String password){
+    private void doAuthenticate(String email, String password) throws Exception{
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
         try {
@@ -52,10 +57,14 @@ public class AuthController {
 
     }
 
-//    @ExceptionHandler(BadCredentialsException.class)
-//    public String exceptionHandler() {
-//        return "Credentials Invalid !!";
-//    }
+    //register new user API
+    @PostMapping("/register")
+    public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO) {
+        UserDTO registeredUser = this.userService.registerNewUser(userDTO);
+
+        return new ResponseEntity<UserDTO>(registeredUser, HttpStatus.CREATED);
+
+    }
 
 
 

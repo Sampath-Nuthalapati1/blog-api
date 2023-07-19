@@ -5,6 +5,10 @@ import com.sampathnuthalapati.blog.Payload.UserDTO;
 import java.util.List;
 
 public interface UserService {
+
+    UserDTO registerNewUser(UserDTO user);
+
+    //for creating normal users
     UserDTO createUser(UserDTO user);
 
     UserDTO updateUser(UserDTO user, Integer userId);
