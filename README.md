@@ -30,3 +30,7 @@ After the build is successful, make sure the tables are generated in the MySQL W
 Then to visit the App:
 
 `localhost:8080/`  
+
+Then to visit Swagger UI:
+
+`localhost:8080//swagger-ui/index.html`  
