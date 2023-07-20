@@ -43,6 +43,15 @@ public class SecurityConfig{
                 .authorizeHttpRequests(auth ->
                         auth
                                 .requestMatchers("/api/v1/auth/**").permitAll()
+                                .requestMatchers(
+
+                                        "v2/api-docs",
+                                        "v3/api-docs",
+                                        "swagger-resources/**",
+
+                                        "swagger-ui/**",
+                                        "webjars/**"
+                                ).permitAll()
                                 .requestMatchers(HttpMethod.GET).permitAll()
                                 .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
