@@ -33,4 +33,4 @@ Then to visit the App:
 
 Then to visit Swagger UI:
 
-`localhost:8080//swagger-ui/index.html`  
+`localhost:8080/swagger-ui/index.html`  
